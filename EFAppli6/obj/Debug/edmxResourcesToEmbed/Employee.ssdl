@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmployeeModels.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EmployeeModelsStoreContainer">
+    <EntitySet Name="EmployeeContactDetails" EntityType="EmployeeModels.Store.EmployeeContactDetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employees" EntityType="EmployeeModels.Store.Employees" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__EmployeeC__Emplo__2C3393D0" Association="EmployeeModels.Store.FK__EmployeeC__Emplo__2C3393D0">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="EmployeeContactDetails" EntitySet="EmployeeContactDetails" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="EmployeeContactDetails">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="LandLine" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__EmployeeC__Emplo__2C3393D0">
+    <End Role="Employees" Type="EmployeeModels.Store.Employees" Multiplicity="1" />
+    <End Role="EmployeeContactDetails" Type="EmployeeModels.Store.EmployeeContactDetails" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="EmployeeContactDetails">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
